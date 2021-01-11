@@ -1,0 +1,31 @@
+version: "3.6"
+networks:
+  main:
+  # db:
+services:
+  # admin:
+  #   image: 
+  #   ports:
+  #    - ${ADMIN_PORT}:80
+  #   networks:
+  #     - main
+
+  api:
+    image: ghcr.io/l2ce/servers-api:latest
+    restart: unless-stopped
+    environment: 
+      SWAGGER_SERVER_URL: ${SWAGGER_SERVER_URL}
+    networks:
+      - main
+
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - ${APP_PORT}:80
+    depends_on:
+      - api
+    networks:
+      - main
