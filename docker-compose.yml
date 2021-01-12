@@ -14,7 +14,9 @@ services:
     image: ghcr.io/l2ce/servers-api:latest
     restart: unless-stopped
     environment: 
-      SWAGGER_SERVER_URL: ${SWAGGER_SERVER_URL}
+      SWAGGER_URL: ${API_SWAGGER_URL}
+      PREFIX: ${API_PREFIX}
+      VERSION: ${API_VERSION}
     networks:
       - main
 
